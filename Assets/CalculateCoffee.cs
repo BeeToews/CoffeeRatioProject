@@ -11,7 +11,7 @@ public class CalculateCoffee : MonoBehaviour
     private Text beanWeightText, waterVolumeText, coffeeRatioText;
 
     private float beanMass, waterVolume;
-    public float beanRatio, waterRatio;
+    public int beanRatio, waterRatio;
 
     public void OnEnable()
     {
@@ -21,7 +21,7 @@ public class CalculateCoffee : MonoBehaviour
             waterRatio = 16;
         }
 
-        coffeeRatioText.text = "Ratio: " + beanRatio.ToString("F2") + "/" + waterRatio.ToString("F2") + "\nBeans to Water";
+        coffeeRatioText.text = "Ratio: " + beanRatio.ToString() + "/" + waterRatio.ToString() + "\nBeans to Water";
     }
 
     public void CalculateCoffeeRatio()
@@ -29,7 +29,7 @@ public class CalculateCoffee : MonoBehaviour
         if (beanInput.text != "")
         {
             beanMass = float.Parse(beanInput.text);
-            waterVolume = beanMass / (beanRatio / waterRatio);
+            waterVolume = beanMass / ((float)beanRatio / waterRatio);
 
             beanInput.text = "";
             waterInput.text = "";
@@ -37,7 +37,7 @@ public class CalculateCoffee : MonoBehaviour
         else if (waterInput.text != "")
         {
             waterVolume = float.Parse(waterInput.text);
-            beanMass = waterVolume * (beanRatio / waterRatio);
+            beanMass = waterVolume * ((float)beanRatio / waterRatio);
 
             beanInput.text = "";
             waterInput.text = "";
@@ -47,11 +47,11 @@ public class CalculateCoffee : MonoBehaviour
         waterVolumeText.text = waterVolume.ToString("F2");
     }
 
-    public void ChangeBeanRatio(float newBeanRatio)
+    public void ChangeBeanRatio(int newBeanRatio)
     {
         beanRatio = newBeanRatio;
     }
-    public void ChangeWaterRatio(float newWaterRatio)
+    public void ChangeWaterRatio(int newWaterRatio)
     {
         waterRatio = newWaterRatio;
     }
