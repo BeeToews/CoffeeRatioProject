@@ -15,6 +15,7 @@ public class CalculateCoffee : MonoBehaviour
 
     public void OnEnable()
     {
+        //If the ratio hasn't been set, default to 1/16
         if (beanRatio == 0 || waterRatio == 0)
         {
             beanRatio = 1;
@@ -26,6 +27,9 @@ public class CalculateCoffee : MonoBehaviour
 
     public void CalculateCoffeeRatio()
     {
+        //Checking calculation inputs (Will take bean mass over water volume)
+        //Calculation is beans = water/(beanRatio/waterRatio)
+        //or water = beans * (beanRatio/waterRatio)
         if (beanInput.text != "")
         {
             beanMass = float.Parse(beanInput.text);
@@ -43,10 +47,12 @@ public class CalculateCoffee : MonoBehaviour
             waterInput.text = "";
         }
 
+        //bean and water weight will round to 2 decimal points (0.01)
         beanWeightText.text = beanMass.ToString("F2");
         waterVolumeText.text = waterVolume.ToString("F2");
     }
 
+    //Allows other scripts to change the bean and water ratio
     public void ChangeBeanRatio(int newBeanRatio)
     {
         beanRatio = newBeanRatio;

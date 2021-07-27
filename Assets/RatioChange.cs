@@ -14,19 +14,18 @@ public class RatioChange : MonoBehaviour
     private int newBeanRatio, newWaterRatio;
 
     public CanvasChange canvasChangeScript;
-    public CalculateCoffee coffeeCalculatorScript;
+    public CalculateCoffee coffeeCalculatorScript;   
 
-    //https://dotnetfiddle.net/nBzr0i this is some code about simplifying fractions
 
     public void OnEnable()
     {
+        //Make sure the correct ratio is displayed when the canvas loads
         coffeeRatioText.text = "Ratio: " + coffeeCalculatorScript.beanRatio + "/" + coffeeCalculatorScript.waterRatio + " \nBeans to Water";
-
-
     }
 
     public void ChangeCoffeeRatio()
     {
+        //Sets the new ratio if it's been changed
         if(beanRatioInput.text != "")
         {
             newBeanRatio = int.Parse(beanRatioInput.text);            
@@ -43,15 +42,20 @@ public class RatioChange : MonoBehaviour
         {
             newWaterRatio = coffeeCalculatorScript.waterRatio;
         }
+        //Reduce fractions
         Reduce(newBeanRatio, newWaterRatio);
 
+        //Changes the ratio in the calculator script
         coffeeCalculatorScript.ChangeBeanRatio(newBeanRatio);
         coffeeCalculatorScript.ChangeWaterRatio(newWaterRatio);
 
+        //Changes the ratio display before changing canvas'
         coffeeRatioText.text = "Ratio: " + newBeanRatio.ToString() + "/" + newWaterRatio.ToString() + " \nBeans to Water";
         canvasChangeScript.RatioToCalculatorCanvas();
     }
 
+    //This doesn't need another script if it's only being called here
+    //https://dotnetfiddle.net/nBzr0i credit where it's due
     private void Reduce(int numerator, int denominator)
     {
         //assign an integer to the gcd value

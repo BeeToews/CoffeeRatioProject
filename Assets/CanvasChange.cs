@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CanvasChange : MonoBehaviour
 {
+    //If there were more canvas' a more reusable solution could be implemented.
+
     [SerializeField]
     private Canvas coffeeCalculatorCanvas, ratioChangeCanvas;
 
